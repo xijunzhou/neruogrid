@@ -1,0 +1,3 @@
+make clean
+cp Makefile_x86 Makefile
+make -j8

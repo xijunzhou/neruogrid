@@ -1,0 +1,36 @@
+# **********************
+# FileName: Makefile
+# **********************
+
+SRC_DIR = ./
+INC_DIR = ./
+OBJ_DIR = ./object/
+BIN_DIR := ./
+
+CROSS_COMPILE ?=
+CC= $(CROSS_COMPILE)gcc
+CFLAGS= -g -Wall -std=gnu99
+LDFLAGS = -lm -lpthread -lrt -ldl
+INCLUDE= -I./
+
+
+SOURCES = $(wildcard $(SRC_DIR)*.c)
+OBJECTS = $(SOURCES:$(SRC_DIR).c = $(SRC_DIR).o)
+TARGET= $(BIN_DIR)gateway
+
+.PHONY:all clean
+all:$(TARGET)
+
+$(TARGET):$(OBJECTS)
+	$(CC) $^ -o $@ $(LDFLAGS)
+%.o:%.c
+	$(CC) $(CFLAGS) -c $< $(INCLUDE) $(LDFLAGS)
+
+clean:
+	@rm -rf $(TARGET) $(SRC_DIR)*.o
+
+
+#--------------------------- END OF FILE ---------------------------#
+
+
+
